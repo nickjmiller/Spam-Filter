@@ -7,12 +7,12 @@ c = conn.cursor()
 
 fake = []
 real = []
-for row in c.execute('SELECT reviewContent, rating, usefulCount, coolCount, funnyCount FROM review WHERE flagged = "Y" '):
+for row in c.execute('SELECT reviewContent, rating, usefulCount, coolCount, funnyCount FROM review WHERE flagged = "Y" OR flagged = "YR" '):
     fake.append([nltk.word_tokenize(row[0]), row[1], row[2], row[3], row[4],'fake'])
 random.shuffle(fake)
 fake = fake[:500]
 
-for row in c.execute('SELECT reviewContent, rating, usefulCount, coolCount, funnyCount FROM review WHERE flagged = "N" '):
+for row in c.execute('SELECT reviewContent, rating, usefulCount, coolCount, funnyCount FROM review WHERE flagged = "N" OR flagged = "NR" '):
     real.append([nltk.word_tokenize(row[0]), row[1], row[2], row[3], row[4],'real'])
 random.shuffle(real)
 real = real[:500]
