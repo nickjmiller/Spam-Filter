@@ -32,6 +32,7 @@ del(real)
 del(fake)
 
 def document_features(doc):
+    """Returns the features of a review, along with its tag"""
     document_words = set(doc['reviewContent'])
     features = {}
     # Grabbing the bigrams
@@ -118,7 +119,7 @@ svmSet = df.apply(svm_features, axis = 1)
 svmSet = vec.fit_transform(svmSet).toarray()
 svmTest, svmTrain = svmSet[:250],svmSet[250:]
 
-                             
+
 svr = SVC()
 svmClass = GridSearchCV(svr, parameters)
 svmClass.fit(svmTrain,trainTags['tag'])
